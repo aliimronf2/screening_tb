@@ -9,7 +9,3 @@ scikit-image==0.19.3
 matplotlib==3.7.1
 
 joblib
-
-tb_utils_1.py
-tb_utils_2.py
-tb_util_3b.py
