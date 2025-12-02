@@ -470,9 +470,17 @@ with st.container():
 
 # Pages
 def show_home():
-    st.image("https://www.who.int/images/default-source/health-topics/tuberculosis/tb-banner.jpg", use_container_width=True)
     c1, c2 = st.columns([2, 1])
-    with c1: st.markdown("### Deteksi Dini Tuberkulosis Berbasis AI\nAplikasi ini menggunakan 3 model berbeda untuk mendeteksi TB dan memvisualisasikan lesi (Infiltrat, Cavity, dll).")
+    with c1: st.markdown("""
+        ### Deteksi Dini Tuberkulosis Berbasis PCD
+        
+        Selamat datang di **TB Screening**. Aplikasi ini dirancang untuk membantu analisis citra X-Ray dada menggunakan Pengolahan Citra Digital.
+        
+        **Fitur:**
+        * ✅ **Multi-Model:** Pilih algoritma deteksi dari berbagai pengembang.
+        * ✅ **Analisis Lesi:** Mendeteksi Infiltrat, Kavitas, Kalsifikasi, dan Efusi secara visual.
+        """)
+        st.image("https://cdn.who.int/media/images/default-source/products/global-reports/tb-report/2025/black-tiles-(ig--fb)-(1).png", use_container_width=False, width=300)
     with c2:
         if st.session_state.logged_in:
             st.success(f"Login sebagai: {st.session_state.username}")
