@@ -1,11 +1,15 @@
 streamlit
-opencv-python-headless
-numpy
-scikit-image
-matplotlib
-scipy
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+Pillow==10.1.0
+
+# versi aman
+scipy==1.10.1
+scikit-image==0.19.3
+matplotlib==3.7.1
+
 joblib
-Pillow
+
 tb_utils_1.py
 tb_utils_2.py
 tb_util_3b.py
