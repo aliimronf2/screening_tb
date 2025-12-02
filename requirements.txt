@@ -4,3 +4,8 @@ numpy
 scikit-image
 matplotlib
 scipy
+joblib
+Pillow
+tb_utils_1.py
+tb_utils_2.py
+tb_util_3b.py
