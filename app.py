@@ -89,14 +89,13 @@ def show_home():
     
     with col1:
         st.markdown("""
-        ### Deteksi Dini Tuberkulosis Berbasis AI
+        ### Deteksi Dini Tuberkulosis Berbasis PCD
         
-        Selamat datang di **TB Screening**. Aplikasi ini dirancang untuk membantu analisis citra X-Ray dada menggunakan teknologi *Computer Vision* dan *Machine Learning* terkini.
+        Selamat datang di **TB Screening**. Aplikasi ini dirancang untuk membantu analisis citra X-Ray dada menggunakan Pengolahan Citra Digital.
         
-        **Fitur Unggulan:**
-        * ✅ **Multi-Model AI:** Pilih algoritma deteksi dari berbagai pengembang.
+        **Fitur:**
+        * ✅ **Multi-Model:** Pilih algoritma deteksi dari berbagai pengembang.
         * ✅ **Analisis Lesi:** Mendeteksi Infiltrat, Kavitas, Kalsifikasi, dan Efusi secara visual.
-        * ✅ **Akurasi Klinis:** Dilatih dengan ribuan dataset terverifikasi.
         """)
         st.image("https://cdn.who.int/media/images/default-source/products/global-reports/tb-report/2025/black-tiles-(ig--fb)-(1).png", use_container_width=False, width=300)
     
@@ -219,7 +218,7 @@ def show_detect():
                             
                             st.markdown(f"### {color_emoji} Prediksi: **{lbl}**")
                             st.progress(result['confidence'])
-                            st.caption(f"Tingkat Keyakinan AI: {result['confidence']*100:.1f}%")
+                            st.caption(f"Tingkat Keyakinan: {result['confidence']*100:.1f}%")
                             
                             st.divider()
                             
