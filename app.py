@@ -471,7 +471,8 @@ with st.container():
 # Pages
 def show_home():
     c1, c2 = st.columns([2, 1])
-    with c1: st.markdown("""
+    with c1: 
+        st.markdown("""
         ### Deteksi Dini Tuberkulosis Berbasis PCD
         
         Selamat datang di **TB Screening**. Aplikasi ini dirancang untuk membantu analisis citra X-Ray dada menggunakan Pengolahan Citra Digital.
