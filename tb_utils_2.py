@@ -11,7 +11,6 @@ from scipy import ndimage
 from scipy.ndimage import gaussian_filter
 from scipy.stats import skew, kurtosis, entropy
 
-
 # 1. KONFIGURASI WARNA & MODEL
 LESION_CONFIG = {
     'Infiltrate': {'color': [0.0, 1.0, 1.0], 'id': 1},    # Cyan
@@ -24,8 +23,8 @@ LESION_CONFIG = {
 def load_sapto_models():
     try:
         # Nama file sesuai request: scaler_paru3 dan model_svm_paru3
-        scaler = joblib.load('models/scaler_paru3.pkl')
-        model = joblib.load('models/model_svm_paru3.pkl')
+        scaler = joblib.load('models/scaler_paru3_baru.pkl')
+        model = joblib.load('models/model_svm_paru3_baru.pkl')
         return scaler, model
     except:
         return None, None
