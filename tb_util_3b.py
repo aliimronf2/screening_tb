@@ -258,7 +258,7 @@ def process_image(image_array):
     if mask is None or np.sum(mask) == 0:
         return {"error": "Gagal segmentasi paru. Gambar mungkin tidak jelas."}
         
-    # Normalize mask 0-1
+    # Normalize mask 0-255 (uint8)
     _, mask_bin = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
     
     # 3. Feature Extraction
@@ -267,11 +267,11 @@ def process_image(image_array):
     
     f_int = extract_intensity_features(img_float, mask_bin)
     f_glcm = extract_glcm_features(img_float, mask_bin)
-    f_shp = extract_shape_features(mask_bin) # Shape
+    f_shp = extract_shape_features(mask_bin) 
     
     img_masked = img_float.copy()
     img_masked[mask_bin == 0] = 0
-    f_hog = extract_hog_features(img_masked, mask_bin) # HOG
+    f_hog = extract_hog_features(img_masked, mask_bin) 
     
     features = f_int + f_glcm + f_shp + f_hog
     features_vector = np.array(features).reshape(1, -1)
@@ -285,12 +285,24 @@ def process_image(image_array):
     lesions = None
     stats = {}
     
+    # Hitung luas paru dalam PIKSEL (Bukan jumlah nilai intensitas)
+    # --- PERBAIKAN UTAMA DI SINI ---
+    lung_area_pixels = np.count_nonzero(mask_bin)
+    # -------------------------------
+
     # Jika TB, deteksi lesi
     if pred == 1:
         lesions = detect_lesions_strict(img_enh, mask_bin)
-        lung_area = np.sum(mask_bin)
+        
         for k, v in lesions.items():
-            stats[k] = (np.sum(v > 0) / lung_area) * 100 if lung_area > 0 else 0
+            # Hitung luas lesi dalam PIKSEL
+            lesion_area_pixels = np.count_nonzero(v)
+            
+            # Hitung Persentase yang Benar
+            if lung_area_pixels > 0:
+                stats[k] = (lesion_area_pixels / lung_area_pixels) * 100
+            else:
+                stats[k] = 0
             
     # Buat Overlay Visualisasi
     vis = cv2.cvtColor(img_512, cv2.COLOR_GRAY2RGB)
@@ -303,11 +315,10 @@ def process_image(image_array):
     # Overlay Lesi (Jika ada)
     if lesions:
         for name, config in LESION_CONFIG.items():
-            # Gunakan 'name' (lowercase) untuk akses lesions
             if name in lesions:
                 m = lesions[name]
                 if np.sum(m) > 0:
-                    color_rgb = config['color'] # [R, G, B]
+                    color_rgb = config['color'] 
                     layer = vis.copy()
                     layer[m > 0] = color_rgb
                     vis = cv2.addWeighted(layer, 0.5, vis, 0.5, 0)
