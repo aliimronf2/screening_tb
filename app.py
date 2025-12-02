@@ -322,8 +322,8 @@ class ModelSaya:
 
     def load_models(self):
         try:
-            self.scaler = joblib.load('models/scaler_3mini.pkl')
-            self.model = joblib.load('models/svm_tb_model_3mini.pkl')
+            self.scaler = joblib.load('models/scaler_data2_3mini.pkl')
+            self.model = joblib.load('models/svm_tb_data2_model3mini.pkl')
             return True
         except: return False
 
