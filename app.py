@@ -509,7 +509,7 @@ def show_detect():
     st.markdown(f"### Analisis X-Ray (User: {st.session_state.username})")
     c1, c2 = st.columns([1, 2])
     with c1:
-        model_opt = st.selectbox("Pilih Model", ["Model Saya (V26)", "Model Gusna", "Model Sapto"])
+        model_opt = st.selectbox("Pilih Model", ["Model 1", "Model 2", "Model 3"])
         uploaded = st.file_uploader("Upload CXR", type=['jpg', 'png', 'jpeg'])
         btn = st.button("🔍 Deteksi", type="primary", use_container_width=True) if uploaded else None
         
@@ -520,9 +520,9 @@ def show_detect():
             if not btn: st.image(img_cv, caption="Preview", width=300, channels="BGR")
             else:
                 with st.spinner("Sedang memproses..."):
-                    if model_opt == "Model Saya (V26)": runner = ModelSaya()
-                    elif model_opt == "Model Gusna": runner = ModelGusna()
-                    elif model_opt == "Model Sapto": runner = ModelSapto()
+                    if model_opt == "Model 3": runner = ModelSaya()
+                    elif model_opt == "Model 1": runner = ModelGusna()
+                    elif model_opt == "Model 2": runner = ModelSapto()
                     
                     res = runner.process(img_cv)
                     
